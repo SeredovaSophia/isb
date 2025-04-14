@@ -1,0 +1,7 @@
+{
+   "input_file2": "task2/input2.txt",
+    "output_file2": "task2/output2.txt",
+    "freq": "task2/my_freq2.json",
+    "keys": "task2/keys.json",
+    "rus_freq": "task2/rus_freq2.json"
+  }

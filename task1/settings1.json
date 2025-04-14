@@ -1,0 +1,6 @@
+{
+    "shift": 6,
+    "input_file": "task1/input1.txt",
+    "output_file": "task1/output1.txt",
+    "alphabet_file": "task1/alphabet1.json"
+}
