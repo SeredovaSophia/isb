@@ -1,5 +1,6 @@
 import math
 from scipy.special import gammaincc
+from constants import pi
 
 def bit_frequency_test(seq):
     """
@@ -57,7 +58,6 @@ def longest_run_in_block_test(seq, m=8):
     if num_blocks == 0:
         return 1.0
 
-    pi = [0.2148, 0.3672, 0.2305, 0.1875] # Теоретические вероятности
     v = [0, 0, 0, 0]
 
     for i in range(num_blocks):
@@ -72,14 +72,15 @@ def longest_run_in_block_test(seq, m=8):
             else:
                 current_run_length = 0
 
-        if max_run_length <= 1:
-            v[0] += 1
-        elif max_run_length == 2:
-            v[1] += 1
-        elif max_run_length == 3:
-            v[2] += 1
-        elif max_run_length >= 4:
-            v[3] += 1
+        match max_run_length:
+            case 0 | 1:
+                v[0] += 1
+            case 2:
+                v[1] += 1
+            case 3:
+                v[2] += 1
+            case _:
+                v[3] += 1
 
     hi_square = sum((v[i] - num_blocks * pi[i]) ** 2 / (num_blocks * pi[i]) for i in range(4))
 
