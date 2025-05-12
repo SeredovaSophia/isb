@@ -20,10 +20,16 @@ def read_file(filename: str):
     :param filename: Путь к файлу
     :return: Последовательность в виде строки
     """
-    with open(filename, "r", encoding='utf-8') as file:
-        sequence = file.read()
-    return sequence
-
+    try:
+        with open(filename, "r", encoding='utf-8') as file:
+            sequence = file.read()
+        return sequence
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Ошибка: Файл не найден")
+    except IOError:
+        raise IOError(f"Ошибка: Не удалось прочитать файл ")
+    except Exception as e:
+        raise Exception("Произошла ошибка: {e}")
 
 def write_res(freq_cpp, freq_java, consecutive_cpp, consecutive_java, long_cpp, long_java, results: str):
     """
