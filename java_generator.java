@@ -2,7 +2,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-public class RandomBinarySequence {
+public class java_generator {
     public static void main(String[] args) {
         Random random = new Random();
         int length = 128;
