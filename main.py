@@ -1,6 +1,23 @@
 import argparse
 import nist
 import os
+import json
+
+def read_json(filename: str) -> dict:
+    """
+    Чтение json файла
+    :param filename: Путь к файлу
+    :return: Последовательность в виде строки
+    """
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        raise FileNotFoundError("Файл не найден")
+    except IOError:
+        raise IOError("Ошибка чтения файла")
+    except Exception as e:
+        raise Exception(f" Произошла ошибка: {e}")
 
 def parse_arguments():
     """
@@ -25,11 +42,12 @@ def read_file(filename: str):
             sequence = file.read()
         return sequence
     except FileNotFoundError:
-        raise FileNotFoundError(f"Ошибка: Файл не найден")
+        raise FileNotFoundError("Ошибка: Файл не найден")
     except IOError:
-        raise IOError(f"Ошибка: Не удалось прочитать файл ")
+        raise IOError("Ошибка: Не удалось прочитать файл ")
     except Exception as e:
-        raise Exception("Произошла ошибка: {e}")
+        raise Exception(f"Произошла ошибка: {e}")
+
 
 def write_res(freq_cpp, freq_java, consecutive_cpp, consecutive_java, long_cpp, long_java, results: str):
     """
@@ -65,6 +83,7 @@ def main():
         raise FileNotFoundError(f"Файл {args.java_file} не найден")
 
     try:
+        constants = read_json('constants.json')
         seq_cpp = read_file(args.cpp_file)
         seq_java = read_file(args.java_file)
 
@@ -74,8 +93,8 @@ def main():
         consecutive_cpp = nist.consecutive_bits_test(seq_cpp)
         consecutive_java = nist.consecutive_bits_test(seq_java)
 
-        long_cpp = nist.longest_run_in_block_test(seq_cpp)
-        long_java = nist.longest_run_in_block_test(seq_java)
+        long_cpp = nist.longest_run_in_block_test(seq_cpp, constants['pi'])
+        long_java = nist.longest_run_in_block_test(seq_java, constants['pi'])
 
         write_res(freq_cpp, freq_java, consecutive_cpp, consecutive_java, long_cpp, long_java, args.results)
 

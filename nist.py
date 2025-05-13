@@ -1,6 +1,5 @@
 import math
 from scipy.special import gammaincc
-from constants import pi
 
 def bit_frequency_test(seq):
     """
@@ -42,10 +41,11 @@ def consecutive_bits_test(seq):
     return p
 
 
-def longest_run_in_block_test(seq, m=8):
+def longest_run_in_block_test(seq, pi:list, m=8):
     """
     Тест на самую длинную последовательность единиц в блоке
     :param seq: Последовательность, состоящая из "0" и "1"
+    :param pi: список вероятностей
     :param m: Размер блока
     :return: P-значение для последовательности
     """
@@ -59,6 +59,7 @@ def longest_run_in_block_test(seq, m=8):
         return 1.0
 
     v = [0, 0, 0, 0]
+
 
     for i in range(num_blocks):
         block = seq[i * m: (i + 1) * m]
