@@ -56,7 +56,15 @@ class AsymCipherManager:
 
     @staticmethod
     def decrypt_key(encr_key: bytes, private_key: rsa.RSAPrivateKey) -> bytes:
-
+        """
+        Расшифровывает симметричный ключ с помощью закрытого
+        :param encr_key: Зашифрованный симметричный ключ
+        :param private_key: Закрытый RSA ключ
+        :return: Расшифрованный симметричный ключ
+        :raises TypeError: Если неверный тип аргументов
+        :raises ValueError: Если зашифрованный ключ пустой
+        :raises RuntimeError: Если ошибка дешифрования
+        """
         if not isinstance(encr_key, bytes):
             raise TypeError("Зашифрованный ключ должен быть в формате bytes")
         if not isinstance(private_key, rsa.RSAPrivateKey):
