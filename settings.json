@@ -1,0 +1,8 @@
+{
+  "text": "text.txt",
+  "encrypt_text": "encrypt_text.txt",
+  "decrypt_text": "decrypt_text.txt",
+  "encrypt_sym_key": "encrypt_sym_key.txt",
+  "private_key": "private_key.pem",
+  "public_key": "public_key.pem"
+}
