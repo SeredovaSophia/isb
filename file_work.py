@@ -76,3 +76,23 @@ def write_txt_file(data: str, file_path: str) -> None:
         raise PermissionError(f"Нет прав на запись в файл: {file_path}") from e
     except Exception as e:
         raise Exception(f"Ошибка при записи файла ммм: {file_path}") from e
+
+def write_bytes_file(file_path: str, data: bytes) -> None:
+    """
+    Сохраняет бинарные данные в файл
+    :param file_path: Путь к файлу
+    :param data: Бинарные данные, которые нужно записать
+    :return: None
+    :raises FileNotFoundError: Если не удалось найти или создать файл по указанному пути
+    :raises PermissionError: Если нет прав на запись в файл
+    :raises Exception: При других ошибках записи
+    """
+    try:
+        with open(file_path, 'wb') as file:
+            file.write(data)
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"Файл не найден: {file_path}") from e
+    except PermissionError as e:
+        raise PermissionError(f"Нет прав на запись в файл: {file_path}") from e
+    except Exception as e:
+        raise Exception(f"Ошибка при записи файла: {file_path}") from e
